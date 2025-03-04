@@ -1,0 +1,52 @@
+import java.util.*;
+
+class Employee {
+    String name;
+    int age;
+    double salary;
+
+    public Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - Age: " + age + ", Salary: " + salary;
+    }
+}
+
+public class EmployeeSort {
+    public static void main(String[] args) {
+        List<Employee> employees = new ArrayList<>(Arrays.asList(
+                new Employee("Anirudh", 30, 50000),
+                new Employee("karik", 25, 60000),
+                new Employee("Suryansh", 35, 70000),
+                new Employee("rohit", 28, 55000)
+        ));
+
+        // Sort by name, then age, then salary using lambda expression
+        employees.sort((e1, e2) -> {
+            int nameCompare = e1.getName().compareTo(e2.getName());
+            if (nameCompare != 0) return nameCompare;
+            int ageCompare = Integer.compare(e1.getAge(), e2.getAge());
+            if (ageCompare != 0) return ageCompare;
+            return Double.compare(e1.getSalary(), e2.getSalary());
+        });
+
+        employees.forEach(System.out::println);
+    }
+}
